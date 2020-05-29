@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Color c = const Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5);
     return MaterialApp(
-      title: 'Hope',
+      title: 'Ho',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -33,8 +33,17 @@ class MyApp extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-
-              Hope().
+              Hope().creaTecla(Colors.redAccent, 1)//,
+              /*
+              Hope().creaTecla(Colors.orangeAccent, 2),
+              Hope().creaTecla(Colors.yellowAccent, 3),
+              Hope().creaTecla(Colors.greenAccent, 4),
+              Hope().creaTecla(Colors.blueAccent, 5),
+              Hope().creaTecla(Colors.red, 6),
+              Hope().creaTecla(Colors.orange, 7),
+              Hope().creaTecla(Colors.yellow, 8),
+              Hope().creaTecla(Colors.green, 9),
+              Hope().creaTecla(Colors.blue, 10)*/
             ],
           ),
         ),
@@ -67,18 +76,21 @@ class Hope extends StatelessWidget{
     final audioPlayer = AudioCache();
     audioPlayer.play('sound$nota.mp3');
   }
+  Expanded creaTecla(Color color, int nota) {
+    return Expanded(
+      child: FlatButton(
+        onPressed: () {
+          teclaSound(nota);
+        },
+        color: color,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    Expanded creaTecla({Color color, int nota}) {
-      return Expanded(
-        child: FlatButton(
-          onPressed: () {
-            teclaSound(nota);
-          },
-          color: color,
-        ),
-      );
-    }
+    // TODO: implement build
+    throw UnimplementedError();
   }
 }
 class _MyHomePageState extends State<MyHomePage> {
