@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,7 +12,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Color c = const Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5);
+    final audio = AudioCache();
+    audio.play('Background.mpeg');
     return MaterialApp(
       title: 'Ho',
       theme: ThemeData(
@@ -33,8 +37,7 @@ class MyApp extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Hope().creaTecla(Colors.redAccent, 1)//,
-              /*
+              Hope().creaTecla(Colors.redAccent, 1),
               Hope().creaTecla(Colors.orangeAccent, 2),
               Hope().creaTecla(Colors.yellowAccent, 3),
               Hope().creaTecla(Colors.greenAccent, 4),
@@ -43,7 +46,7 @@ class MyApp extends StatelessWidget {
               Hope().creaTecla(Colors.orange, 7),
               Hope().creaTecla(Colors.yellow, 8),
               Hope().creaTecla(Colors.green, 9),
-              Hope().creaTecla(Colors.blue, 10)*/
+              Hope().creaTecla(Colors.blue, 10)
             ],
           ),
         ),
@@ -76,11 +79,34 @@ class Hope extends StatelessWidget{
     final audioPlayer = AudioCache();
     audioPlayer.play('sound$nota.mp3');
   }
+  String fraseRandom(){
+    var frases = [
+      "¡CUUUUUMBIIIAAAA!",
+      "¡Hasta la pista, baby!",
+      "¡Y echale Vadeeeer!",
+      "¡Saludos a la familia Escarcega!"
+    ];
+    var r = 0 + Random().nextInt(4 - 0);
+    return frases[r];
+  }
+  void mensajeC() {
+    Fluttertoast.showToast(
+        msg: fraseRandom(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+  }
+
   Expanded creaTecla(Color color, int nota) {
     return Expanded(
       child: FlatButton(
         onPressed: () {
           teclaSound(nota);
+          mensajeC();
         },
         color: color,
       ),
